@@ -100,7 +100,15 @@ typedef enum ColorElements_ {
    CPU_IOWAIT,
    CPU_IRQ,
    CPU_SOFTIRQ,
+   CPU_TEMP,
+   CPU_TEMP_HOT,
+   CPU_TEMP_WARM,
+   CPU_TEMP_NORMAL,
    HOSTNAME,
+   FAN_RPM,
+   FAN_RPM_HOT,
+   FAN_RPM_WARM,
+   FAN_RPM_NORMAL,
    LAST_COLORELEMENT
 } ColorElements;
 
@@ -265,6 +273,14 @@ void CRT_setColors(int colorScheme) {
       CRT_colors[CPU_IOWAIT] = A_NORMAL;
       CRT_colors[CPU_IRQ] = A_BOLD;
       CRT_colors[CPU_SOFTIRQ] = A_BOLD;
+      CRT_colors[CPU_TEMP] = A_BOLD;
+      CRT_colors[CPU_TEMP_HOT] = A_BOLD;
+      CRT_colors[CPU_TEMP_WARM] = A_BOLD;
+      CRT_colors[CPU_TEMP_NORMAL] = A_NORMAL;
+      CRT_colors[FAN_RPM] = A_BOLD;
+      CRT_colors[FAN_RPM_HOT] = A_BOLD;
+      CRT_colors[FAN_RPM_WARM] = A_BOLD;
+      CRT_colors[FAN_RPM_NORMAL] = A_NORMAL;
       CRT_colors[HOSTNAME] = A_BOLD;
    } else if (CRT_colorScheme == COLORSCHEME_BLACKONWHITE) {
       CRT_colors[RESET_COLOR] = ColorPair(Black,White);
@@ -324,6 +340,14 @@ void CRT_setColors(int colorScheme) {
       CRT_colors[CPU_IOWAIT] = A_BOLD | ColorPair(Black, Black);
       CRT_colors[CPU_IRQ] = ColorPair(Blue,White);
       CRT_colors[CPU_SOFTIRQ] = ColorPair(Blue,White);
+      CRT_colors[CPU_TEMP] = ColorPair(Blue,White);
+      CRT_colors[CPU_TEMP_HOT] = ColorPair(Red,White);
+      CRT_colors[CPU_TEMP_WARM] = ColorPair(Black,Yellow);
+      CRT_colors[CPU_TEMP_NORMAL] = ColorPair(Black,Green);
+      CRT_colors[FAN_RPM] = ColorPair(Blue,White);
+      CRT_colors[FAN_RPM_HOT] = ColorPair(Red,White);
+      CRT_colors[FAN_RPM_WARM] = ColorPair(Black,Yellow);
+      CRT_colors[FAN_RPM_NORMAL] = ColorPair(Black,Green);
       CRT_colors[HOSTNAME] = ColorPair(Black,White);
    } else if (CRT_colorScheme == COLORSCHEME_BLACKONWHITE2) {
       CRT_colors[RESET_COLOR] = ColorPair(Black,Black);
@@ -383,6 +407,14 @@ void CRT_setColors(int colorScheme) {
       CRT_colors[CPU_IOWAIT] = A_BOLD | ColorPair(Black, Black);
       CRT_colors[CPU_IRQ] = A_BOLD | ColorPair(Blue,Black);
       CRT_colors[CPU_SOFTIRQ] = ColorPair(Blue,Black);
+      CRT_colors[CPU_TEMP] = ColorPair(Blue,Black);
+      CRT_colors[CPU_TEMP_HOT] = ColorPair(Red,White);
+      CRT_colors[CPU_TEMP_WARM] = ColorPair(Blue,Yellow);
+      CRT_colors[CPU_TEMP_NORMAL] = ColorPair(Blue,Green);
+      CRT_colors[FAN_RPM] = ColorPair(Blue,Black);
+      CRT_colors[FAN_RPM_HOT] = ColorPair(Red,White);
+      CRT_colors[FAN_RPM_WARM] = ColorPair(Blue,Yellow);
+      CRT_colors[FAN_RPM_NORMAL] = ColorPair(Blue,Green);
       CRT_colors[HOSTNAME] = ColorPair(White,Black);
    } else if (CRT_colorScheme == COLORSCHEME_MIDNIGHT) {
       CRT_colors[RESET_COLOR] = ColorPair(White,Blue);
@@ -442,6 +474,14 @@ void CRT_setColors(int colorScheme) {
       CRT_colors[CPU_IOWAIT] = ColorPair(Yellow,Blue);
       CRT_colors[CPU_IRQ] = A_BOLD | ColorPair(Black,Blue);
       CRT_colors[CPU_SOFTIRQ] = ColorPair(Black,Blue);
+      CRT_colors[CPU_TEMP] = ColorPair(Black,Blue);
+      CRT_colors[CPU_TEMP_HOT] = ColorPair(Red,White);
+      CRT_colors[CPU_TEMP_WARM] = ColorPair(Black,Yellow);
+      CRT_colors[CPU_TEMP_NORMAL] = ColorPair(Black,Green);
+      CRT_colors[FAN_RPM] = ColorPair(Black,Blue);
+      CRT_colors[FAN_RPM_HOT] = ColorPair(Red,White);
+      CRT_colors[FAN_RPM_WARM] = ColorPair(Black,Yellow);
+      CRT_colors[FAN_RPM_NORMAL] = ColorPair(Black,Green);
       CRT_colors[HOSTNAME] = ColorPair(White,Blue);
    } else if (CRT_colorScheme == COLORSCHEME_BLACKNIGHT) {
       CRT_colors[RESET_COLOR] = ColorPair(Cyan,Black);
@@ -501,6 +541,14 @@ void CRT_setColors(int colorScheme) {
       CRT_colors[CPU_IOWAIT] = ColorPair(Yellow,Black);
       CRT_colors[CPU_IRQ] = A_BOLD | ColorPair(Blue,Black);
       CRT_colors[CPU_SOFTIRQ] = ColorPair(Blue,Black);
+      CRT_colors[CPU_TEMP] = ColorPair(Blue,Black);
+      CRT_colors[CPU_TEMP_HOT] = ColorPair(Red,White);
+      CRT_colors[CPU_TEMP_WARM] = ColorPair(Blue,Yellow);
+      CRT_colors[CPU_TEMP_NORMAL] = ColorPair(Blue,Green);
+      CRT_colors[FAN_RPM] = ColorPair(Blue,Black);
+      CRT_colors[FAN_RPM_HOT] = ColorPair(Red,White);
+      CRT_colors[FAN_RPM_WARM] = ColorPair(Blue,Yellow);
+      CRT_colors[FAN_RPM_NORMAL] = ColorPair(Blue,Green);
       CRT_colors[HOSTNAME] = ColorPair(Green,Black);
    } else {
       /* Default */
@@ -561,6 +609,14 @@ void CRT_setColors(int colorScheme) {
       CRT_colors[CPU_IOWAIT] = A_BOLD | ColorPair(Black, Black);
       CRT_colors[CPU_IRQ] = ColorPair(Yellow,Black);
       CRT_colors[CPU_SOFTIRQ] = ColorPair(Magenta,Black);
+      CRT_colors[CPU_TEMP] = ColorPair(Red,Black);
+      CRT_colors[CPU_TEMP_HOT] = ColorPair(Red,White);
+      CRT_colors[CPU_TEMP_WARM] = ColorPair(Yellow,Black);
+      CRT_colors[CPU_TEMP_NORMAL] = ColorPair(Green,Black);
+      CRT_colors[FAN_RPM] = ColorPair(Red,Black);
+      CRT_colors[FAN_RPM_HOT] = ColorPair(Red,White);
+      CRT_colors[FAN_RPM_WARM] = ColorPair(Yellow,Black);
+      CRT_colors[FAN_RPM_NORMAL] = ColorPair(Green,Black);
       CRT_colors[HOSTNAME] = A_BOLD;
    }
 }

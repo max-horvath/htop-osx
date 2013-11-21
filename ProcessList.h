@@ -27,20 +27,13 @@ in the source distribution for its full text.
 #include "String.h"
 
 #include <dirent.h>
-#include <mach/host_info.h>
-#include <mach/mach_host.h>
-#include <mach/mach_init.h>
-#include <mach/mach_interface.h>
-#include <mach/mach_port.h>
-#include <mach/mach_traps.h>
-#include <mach/mach_types.h>
-#include <mach/machine.h>
-#include <mach/processor_info.h>
-#include <mach/shared_memory_server.h>
-#include <mach/task.h>
-#include <mach/thread_act.h>
-#include <mach/time_value.h>
-#include <mach/vm_map.h>
+#include <mach/mach.h>
+#if defined(__APPLE__) && (MAC_OS_X_VERSION_MIN_REQUIRED >= 1060)
+  #include <mach/shared_region.h>
+  #include "shared_memory_server_shim.h"
+#else
+  #include <mach/shared_memory_server.h> /* deprecated in 10.6 */
+#endif
 #include <sys/proc.h>
 #include <sys/resource.h>
 #include <sys/stat.h>

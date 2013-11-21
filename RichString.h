@@ -20,6 +20,9 @@
 #else
 #include <curses.h>
 #endif
+#if defined(__APPLE__) && !defined(HAVE_LIBNCURSESW)
+#define HAVE_LIBNCURSESW
+#endif
 
 #define RICHSTRING_MAXLEN 300
 
@@ -27,7 +30,7 @@
 #define RichString_init(this) (this)->len = 0
 #define RichString_initVal(this) (this).len = 0
 
-#ifdef HAVE_LIBNCURSESW
+#ifdef HAVE_LIBNCURSESW 
 #define RichString_printVal(this, y, x) mvadd_wchstr(y, x, this.chstr)
 #define RichString_printoffnVal(this, y, x, off, n) mvadd_wchnstr(y, x, this.chstr + off, n)
 #define RichString_getCharVal(this, i) (this.chstr[i].chars[0] & 255)
@@ -39,7 +42,7 @@
 
 typedef struct RichString_ {
    int len;
-#ifdef HAVE_LIBNCURSESW
+#ifdef HAVE_LIBNCURSESW 
    cchar_t chstr[RICHSTRING_MAXLEN+1];
 #else
    chtype chstr[RICHSTRING_MAXLEN+1];
@@ -51,7 +54,7 @@ typedef struct RichString_ {
 #define MIN(a,b) ((a)<(b)?(a):(b))
 #endif
 
-#ifdef HAVE_LIBNCURSESW
+#ifdef HAVE_LIBNCURSESW 
 
 extern void RichString_appendn(RichString* this, int attrs, char* data_c, int len);
 
