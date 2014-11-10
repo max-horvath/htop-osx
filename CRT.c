@@ -12,6 +12,8 @@ in the source distribution for its full text.
 #include <stdlib.h>
 #include <stdbool.h>
 
+#include <unistd.h>
+
 #include "String.h"
 
 #include "config.h"
@@ -125,8 +127,13 @@ int CRT_colors[LAST_COLORELEMENT] = { 0 };
 char* CRT_termType;
 
 static void CRT_handleSIGSEGV(int signal) {
+   void *array[10];
+   size_t size;
+   size = backtrace(array, 10);
+
    CRT_done();
    fprintf(stderr, "htop " VERSION " aborted. Please report bug at http://htop.sf.net\n");
+   backtrace_symbols_fd(array, size, STDERR_FILENO);
    exit(1);
 }
 
