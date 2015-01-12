@@ -135,19 +135,24 @@ void Header_defaultMeters(Header* this) {
 void Header_draw(Header* this) {
    int height = this->height;
    int pad = this->pad;
-   
+   int cols;
+
    attrset(CRT_colors[RESET_COLOR]);
+   if (COLS>178) cols=178;
+
    for (int y = 0; y < height; y++) {
       mvhline(y, 0, ' ', COLS);
    }
+   
    for (int y = (pad / 2), i = 0; i < Vector_size(this->leftMeters); i++) {
       Meter* meter = (Meter*) Vector_get(this->leftMeters, i);
-      meter->draw(meter, pad, y, COLS / 2 - (pad * 2 - 1) - 1);
+      meter->draw(meter, pad, y, cols / 2 - (pad * 2 - 1) - 1);
       y += meter->h;
    }
+
    for (int y = (pad / 2), i = 0; i < Vector_size(this->rightMeters); i++) {
       Meter* meter = (Meter*) Vector_get(this->rightMeters, i);
-      meter->draw(meter, COLS / 2 + pad, y, COLS / 2 - (pad * 2 - 1) - 1);
+      meter->draw(meter, cols / 2 + pad, y, cols / 2 - (pad * 2 - 1) - 1);
       y += meter->h;
    }
 }
