@@ -722,22 +722,16 @@ ERROR_A:
       snprintf( command_name, bufsize, "(%s)", KI_PROC( k )->p_comm );
 }
 
+// Process state mapping, same as in 'ps' command
+//                                0123456
+static char mach_state_table[] = " RUSITH";
+
 static int
 ProcessList_decodeState( int st ) {
-  switch ( st ) {
-  case SIDL:
-    return 'C';
-  case SRUN:
-    return 'R';
-  case SSLEEP:
-    return 'S';
-  case SSTOP:
-    return 'T';
-  case SZOMB:
-    return 'Z';
-  default:
+  if (0 <= st && st <= 6)
+    return mach_state_table[st];
+  else
     return '?';
-  }
 }
 
 static bool
