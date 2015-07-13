@@ -138,12 +138,16 @@ void Header_draw(Header* this) {
    int cols;
 
    attrset(CRT_colors[RESET_COLOR]);
-   if (COLS>178) cols=178;
+   if (COLS > 178) {
+      cols = 178;
+   } else {
+      cols = COLS;
+   }
 
    for (int y = 0; y < height; y++) {
       mvhline(y, 0, ' ', COLS);
    }
-   
+
    for (int y = (pad / 2), i = 0; i < Vector_size(this->leftMeters); i++) {
       Meter* meter = (Meter*) Vector_get(this->leftMeters, i);
       meter->draw(meter, pad, y, cols / 2 - (pad * 2 - 1) - 1);
