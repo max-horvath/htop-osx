@@ -24,12 +24,12 @@ noerr( int rc ) {
 
 void
 drop_privileges() {
-    (void) seteuid(getuid());
+  (void) seteuid(getuid());
 }
 
 void
 elevate_privileges() {
-    (void) seteuid(0);
+  (void) seteuid(0);
 }
 
 /* vim:ts=2:sw=2:sts=2:et:ft=c 
