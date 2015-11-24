@@ -784,7 +784,9 @@ ProcessList_getProcesses( ProcessList * this, float period ) {
 
     ki->ki_p = kp;
 
+    elevate_privileges();
     ProcessList_getTaskInfo( ki );
+    drop_privileges();
 
     p = KI_PROC( ki );
     e = KI_EPROC( ki );
@@ -811,8 +813,10 @@ ProcessList_getProcesses( ProcessList * this, float period ) {
 
     process->updated = true;
 
+    elevate_privileges();
     ProcessList_getCmdLine( ki, command_name, sizeof( command_name ),
                             &cmdlen, 0, 1 );
+    drop_privileges();
 
     user_time = ki->tasks_info.user_time;
     time_value_add( &user_time, &ki->times.user_time );

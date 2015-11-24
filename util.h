@@ -14,6 +14,12 @@ die( const char *msg, ... );
 void
 noerr( int rc );
 
+void
+drop_privileges();
+
+void
+elevate_privileges();
+
 /* vim:ts=2:sw=2:sts=2:et:ft=c 
  */
 
