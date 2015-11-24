@@ -31,6 +31,7 @@ in the source distribution for its full text.
 
 #include "config.h"
 #include "debug.h"
+#include "util.h"
 
 //#link m
 
@@ -238,6 +239,8 @@ int main(int argc, char** argv) {
    bool userOnly = false;
    uid_t userId = 0;
    int sortKey = 0;
+
+   drop_privileges();
 
    char *lc_ctype = getenv("LC_CTYPE");
    if(lc_ctype != NULL)
